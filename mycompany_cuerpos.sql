@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.33, for macos13 (arm64)
 --
 -- Host: localhost    Database: mycompany
 -- ------------------------------------------------------
--- Server version	8.0.27
+-- Server version	8.4.2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,6 +30,16 @@ CREATE TABLE `cuerpos` (
   CONSTRAINT `fk_cue_art` FOREIGN KEY (`id_articulo`) REFERENCES `articulos` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cuerpos`
+--
+
+LOCK TABLES `cuerpos` WRITE;
+/*!40000 ALTER TABLE `cuerpos` DISABLE KEYS */;
+INSERT INTO `cuerpos` VALUES (123,'2der5tgd',5),(134,'2we34rtg5',2),(145,'33456tgfr4',3);
+/*!40000 ALTER TABLE `cuerpos` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -40,4 +50,4 @@ CREATE TABLE `cuerpos` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-18 11:29:41
+-- Dump completed on 2024-08-23 20:25:15

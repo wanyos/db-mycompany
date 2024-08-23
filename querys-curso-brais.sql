@@ -46,6 +46,36 @@ update datos_clientes set edad=46, apellidos='romero ramo' where id=10;
 delete from datos_clientes where id=10;
 select * from datos_clientes;
 
+# drop table
+create table aux (id int primary key, name varchar(10) unique, last varchar(12));
+show tables;
+drop table aux;
+
+# alter table
+show create table articulos;
+alter table articulos add fecha_registro date;
+alter table articulos rename column fecha_registro to fecha_fabricacion;
+alter table articulos modify column fecha_fabricacion datetime;
+alter table articulos drop column name_colum;
+alter table articulos change column fecha_fabricacion fecha_registro datetime not null;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
