@@ -16,36 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `datos_clientes`
+-- Table structure for table `historico_clientes`
 --
 
-DROP TABLE IF EXISTS `datos_clientes`;
+DROP TABLE IF EXISTS `historico_clientes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `datos_clientes` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL,
-  `apellidos` varchar(100) NOT NULL,
-  `direccion` int NOT NULL,
-  `telefono` varchar(20) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `edad` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_dat_dir` (`direccion`),
-  KEY `idx_name` (`nombre`),
-  KEY `idx_name_last` (`nombre`,`apellidos`),
-  CONSTRAINT `fk_dat_dir` FOREIGN KEY (`direccion`) REFERENCES `direcciones` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `historico_clientes` (
+  `id_cliente` int NOT NULL,
+  `fecha_registro` date DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
+  `hora_registro` time DEFAULT NULL,
+  PRIMARY KEY (`id_cliente`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `datos_clientes`
+-- Dumping data for table `historico_clientes`
 --
 
-LOCK TABLES `datos_clientes` WRITE;
-/*!40000 ALTER TABLE `datos_clientes` DISABLE KEYS */;
-INSERT INTO `datos_clientes` VALUES (6,'juanjo','romero ramos',5,'615 615 529','juanjor@gmail.com',50),(7,'david','romero ramos',6,'987 675 567','david@mail.com',49),(8,'alberto','romero ramos',7,'987 3453467','alberto@mail.com',46),(11,'juanjo','romero ramos',5,'615 615 529','juanjor@gmail.com',50),(12,'manolo','del bombo',7,'915 555 555','manolo@gmail.com',32),(13,'benito','sabchez martinez',7,'915 335 125','benito@gmail.com',42);
-/*!40000 ALTER TABLE `datos_clientes` ENABLE KEYS */;
+LOCK TABLES `historico_clientes` WRITE;
+/*!40000 ALTER TABLE `historico_clientes` DISABLE KEYS */;
+INSERT INTO `historico_clientes` VALUES (0,'2024-08-25','manolo@gmail.com','16:42:49'),(13,'2024-08-25','benito@gmail.com','16:51:53');
+/*!40000 ALTER TABLE `historico_clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

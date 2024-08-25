@@ -24,13 +24,10 @@ DROP TABLE IF EXISTS `clientes`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `clientes` (
   `id_cliente` int NOT NULL,
-  `direccion_envio` int DEFAULT NULL,
   `saldo` decimal(10,2) DEFAULT NULL,
   `descuento` decimal(5,4) DEFAULT NULL,
   PRIMARY KEY (`id_cliente`),
-  KEY `fk_cli_dir` (`direccion_envio`),
   CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `datos_clientes` (`id`),
-  CONSTRAINT `fk_cli_dir` FOREIGN KEY (`direccion_envio`) REFERENCES `direcciones` (`id`),
   CONSTRAINT `clientes_chk_1` CHECK ((`saldo` <= 3000))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -41,7 +38,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (6,5,2300.00,0.5000),(7,6,1500.00,0.3000),(8,5,1200.00,0.1000);
+INSERT INTO `clientes` VALUES (6,2300.00,0.5000),(7,1500.00,0.3000),(8,1200.00,0.1000);
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-23 20:25:15
+-- Dump completed on 2024-08-25 17:03:57

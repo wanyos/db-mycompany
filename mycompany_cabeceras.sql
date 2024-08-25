@@ -25,7 +25,8 @@ DROP TABLE IF EXISTS `cabeceras`;
 CREATE TABLE `cabeceras` (
   `id_cliente` int NOT NULL,
   `direccion_envio` int NOT NULL,
-  `fecha` datetime DEFAULT NULL,
+  `fecha_registro` date DEFAULT NULL,
+  `hora_registro` date DEFAULT NULL,
   PRIMARY KEY (`id_cliente`),
   KEY `fk_cab_dir` (`direccion_envio`),
   CONSTRAINT `fk_cab_cli` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`),
@@ -39,7 +40,7 @@ CREATE TABLE `cabeceras` (
 
 LOCK TABLES `cabeceras` WRITE;
 /*!40000 ALTER TABLE `cabeceras` DISABLE KEYS */;
-INSERT INTO `cabeceras` VALUES (6,5,'2024-08-19 00:00:00'),(7,6,'2024-08-20 00:00:00');
+INSERT INTO `cabeceras` VALUES (6,5,NULL,NULL),(7,6,NULL,NULL);
 /*!40000 ALTER TABLE `cabeceras` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-08-23 20:25:15
+-- Dump completed on 2024-08-25 17:03:57

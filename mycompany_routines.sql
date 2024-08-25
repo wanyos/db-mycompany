@@ -16,31 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `pedidos`
+-- Temporary view structure for view `v_clientes_edad`
 --
 
-DROP TABLE IF EXISTS `pedidos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
+DROP TABLE IF EXISTS `v_clientes_edad`;
+/*!50001 DROP VIEW IF EXISTS `v_clientes_edad`*/;
+SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `pedidos` (
-  `cabecera` int DEFAULT NULL,
-  `cuerpo` int DEFAULT NULL,
-  KEY `fk_ped_cab` (`cabecera`),
-  KEY `fk_ped_cue` (`cuerpo`),
-  CONSTRAINT `fk_ped_cab` FOREIGN KEY (`cabecera`) REFERENCES `cabeceras` (`id_cliente`),
-  CONSTRAINT `fk_ped_cue` FOREIGN KEY (`cuerpo`) REFERENCES `cuerpos` (`id_articulo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+/*!50001 CREATE VIEW `v_clientes_edad` AS SELECT 
+ 1 AS `nombre`,
+ 1 AS `edad`*/;
+SET character_set_client = @saved_cs_client;
 
 --
--- Dumping data for table `pedidos`
+-- Final view structure for view `v_clientes_edad`
 --
 
-LOCK TABLES `pedidos` WRITE;
-/*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
-INSERT INTO `pedidos` VALUES (6,134),(7,145);
-/*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
-UNLOCK TABLES;
+/*!50001 DROP VIEW IF EXISTS `v_clientes_edad`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `v_clientes_edad` AS select `datos_clientes`.`nombre` AS `nombre`,`datos_clientes`.`edad` AS `edad` from `datos_clientes` where (`datos_clientes`.`edad` >= 45) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

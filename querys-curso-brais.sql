@@ -1,4 +1,4 @@
-use mycompany;
+use mycompany;use mycompany;
 
 select * from datos_clientes;
 select * from clientes order by saldo;
@@ -60,7 +60,65 @@ alter table articulos drop column name_colum;
 alter table articulos change column fecha_fabricacion fecha_registro datetime not null;
 
 
+# inner join
+-- nos trae todos los datos de la primera tabla con todos los datos de la segunda tabla
+-- por cada entrada de la primera tabla recorre todo de la segunda. Se suele usar en relaciones 1:1
+select * from clientes inner join datos_clientes;
+select * from clientes inner join datos_clientes on clientes.id_cliente = datos_clientes.id; -- cada entrada de clientes trae los datos del cliente
+select * from clientes inner join datos_clientes on clientes.id_cliente = datos_clientes.id order by edad asc;
 
+select * from articulos inner join fabricas on articulos.fabrica = fabricas.id; -- relacion 1:N
+select * from pedidos 
+	inner join cabeceras on pedidos.cabecera = cabeceras.id_cliente
+    inner join cuerpos on pedidos.cuerpo = cuerpos.id_articulo; -- relacion N.N
+
+# left join
+-- obtenemos todos los datos de la tabla de la izquierda, tenga datos de la otra tabla o no los tenga
+select * from clientes left join datos_clientes on clientes.id_cliente = datos_clientes.id;
+select * from datos_clientes left join clientes on datos_clientes.id = clientes.id_cliente;
+select * from pedidos left join cabeceras on pedidos.cabecera = cabeceras.id_cliente left join cuerpos on pedidos.cuerpo = cuerpos.id_articulo;
+-- el right join es igual que el left join
+
+#  union (full join)
+select id_articulo as art from cuerpos union select nombre from fabricas;
+
+# index
+-- los indices repercuten en el rendimiento de la base datos
+-- se usa indice en aquel o aquellos campos de busqueda que vamos a usar con frecuencia. Buscara mas rapido con un indice
+create index idx_name on datos_clientes(nombre);
+create index idx_name_last on datos_clientes(nombre, apellidos);
+drop index idx_name on datos_clientes;
+
+# triggers
+-- en los values se ponen los campos de la tabla datos_clientes, ya sean nuevos o viejos con old
+delimiter -
+create trigger tg_historico 
+after insert on datos_clientes 
+for each row  
+begin 
+	insert into historico_clientes (id_cliente, fecha_registro, email, hora_registro) values (new.id, curdate(), new.email, curtime()); 
+end;
+-
+delimiter ;
+
+drop trigger name;
+
+
+# fechas y horas
+SELECT DATE(NOW()) AS fecha, CURDATE() AS fecha2; -- fecha sistema
+SELECT TIME(NOW()) hora, CURTIME() hora2; -- hora sistema
+SELECT EXTRACT(DAY FROM fecha) AS dia FROM cabeceras; -- extrae el dia del campo fecha
+SELECT EXTRACT(MONTH FROM fecha) AS mes FROM cabeceras; -- extrae el mes del campo fecha
+SELECT EXTRACT(YEAR FROM fecha) AS año, EXTRACT(MONTH FROM fecha) AS mes FROM cabeceras; -- extrae el año y el mes campo fecha
+
+
+# views
+create view v_clientes_edad as select nombre, edad from datos_clientes where edad >= 45;
+select * from v_clientes_edad; -- se usa cuando va ha ser una consulta constante, es mas rapido con una view
+drop view name;
+
+
+# stord procedure
 
 
 
