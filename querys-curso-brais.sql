@@ -54,7 +54,7 @@ drop table aux;
 # alter table
 show create table articulos;
 alter table articulos add fecha_registro date;
-alter table articulos rename column fecha_registro to fecha_fabricacion;
+-- alter table articulos rename column fecha_registro to fecha_fabricacion;
 alter table articulos modify column fecha_fabricacion datetime;
 alter table articulos drop column name_colum;
 alter table articulos change column fecha_fabricacion fecha_registro datetime not null;
@@ -118,11 +118,41 @@ select * from v_clientes_edad; -- se usa cuando va ha ser una consulta constante
 drop view name;
 
 
-# stord procedure
+# stored procedure
+delimiter -
+create procedure p_all_users()
+begin
+	select * from datos_clientes;
+end; -
+
+delimiter -
+create procedure p_edad_users(in edad_param int)
+begin
+	select * from datos_clientes where edad >= edad_param;
+end; -
+
+call p_all_users();
+call p_edad_users(47);
+
+drop procedure p_edad_users;
 
 
+# transaction
+start transaction;
+set autocommit = 0; # las instrucciones se guardan de forma temporal
+	insert into fabricas (id, nombre, telefono) values (4, 'clicar', '014 456 456');
+	SET @new_id = (SELECT id FROM fabricas WHERE nombre = 'clicar' ORDER BY id DESC LIMIT 1);
+		SELECT @new_id AS 'Nuevo ID';
+        
+SET @should_commit = IF(@new_id IS NOT NULL, 1, 0);
+SELECT IF(@should_commit = 1, 'Committing transaction', 'Rolling back transaction') AS Action;
+SELECT IF(@should_commit = 1, 'COMMIT', 'ROLLBACK') INTO @action;
 
+# concurrencia
 
+# sql injection
+ # no dejar concatenar string a una query hecha con cualquier conector de otro lenguaje
+ # todos los conectores tienen mecanismos para evitar la posibilidad de concatenar string de los parametros
 
 
 
